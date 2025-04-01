@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Online Shop</title>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-dark: #3a56d4;
+            --text-color: #2b2d42;
+            --light-gray: #f8f9fa;
+            --border-color: #dee2e6;
+            --error-color: #d90429;
+            --success-color: #2ecc71;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+            margin: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            width: 380px;
+            max-width: 95%;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-container h2 {
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        
+        .input-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .login-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 1.5rem;
+        }
+        
+        .footer-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            text-align: left;
+        }
+        
+        .success-message {
+            color: var(--success-color);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            text-align: left;
+        }
+        
+        .forgot-password {
+            display: block;
+            text-align: right;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .password-rules {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+            text-align: left;
+        }
+        
+        .password-rules ul {
+            padding-left: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        
+        .password-rules li {
+            margin-bottom: 0.3rem;
+        }
+        
+        .rule-valid {
+            color: var(--success-color);
+        }
+        
+        .rule-invalid {
+            color: var(--error-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">OnlineShop</div>
+        <h2>Welcome Back</h2>
+        
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" placeholder="Enter your email">
+        </div>
+        
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+            <div class="password-rules">
+                <p>Password must contain:</p>
+                <ul>
+                    <li id="rule-length">At least 6 characters</li>
+                    <li id="rule-uppercase">1 uppercase letter</li>
+                    <li id="rule-number">1 number</li>
+                    <li id="rule-symbol">1 symbol</li>
+                </ul>
+            </div>
+            <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <p id="error-message" class="error-message"></p>
+        <p id="success-message" class="success-message"></p>
+        
+        <button class="login-btn" onclick="validateAndLogin()">Sign In</button>
+        
+        <p class="footer-text">
+            Don't have an account? <a href="#">Sign up</a>
+        </p>
+    </div>
+
+    <script>
+        // Password validation rules
+        const passwordRules = {
+            length: /^.{6,}$/,
+            uppercase: /[A-Z]/,
+            number: /[0-9]/,
+            symbol: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
+        };
+        
+        // Validate password in real-time
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            validatePassword(password);
+        });
+        
+        function validatePassword(password) {
+            // Check each rule
+            const isLengthValid = passwordRules.length.test(password);
+            const isUppercaseValid = passwordRules.uppercase.test(password);
+            const isNumberValid = passwordRules.number.test(password);
+            const isSymbolValid = passwordRules.symbol.test(password);
+            
+            // Update UI for each rule
+            updateRuleStatus('rule-length', isLengthValid);
+            updateRuleStatus('rule-uppercase', isUppercaseValid);
+            updateRuleStatus('rule-number', isNumberValid);
+            updateRuleStatus('rule-symbol', isSymbolValid);
+            
+            return isLengthValid && isUppercaseValid && isNumberValid && isSymbolValid;
+        }
+        
+        function updateRuleStatus(elementId, isValid) {
+            const element = document.getElementById(elementId);
+            if (isValid) {
+                element.classList.add('rule-valid');
+                element.classList.remove('rule-invalid');
+            } else {
+                element.classList.add('rule-invalid');
+                element.classList.remove('rule-valid');
+            }
+        }
+        
+        function validateEmail(email) {
+            return email.includes('@') && email.length > 3 && email.indexOf('@') > 0 && email.indexOf('@') < email.length - 1;
+        }
+        
+        function validateAndLogin() {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorMessage = document.getElementById("error-message");
+            const successMessage = document.getElementById("success-message");
+            
+            errorMessage.textContent = "";
+            successMessage.textContent = "";
+            
+            // Validate email
+            if (!validateEmail(email)) {
+                errorMessage.textContent = "Please enter a valid email address containing '@' symbol.";
+                return;
+            }
+            
+            // Validate password
+            if (!validatePassword(password)) {
+                errorMessage.textContent = "Password doesn't meet all requirements.";
+                return;
+            }
+            
+            // Save login info to localStorage
+            saveLoginInfo(email, password);
+            
+            // Show success message
+            successMessage.textContent = "Login successful! Redirecting...";
+            
+            // Redirect after a short delay
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1500);
+        }
+        
+        function saveLoginInfo(email, password) {
+            // In a real application, you would NEVER store passwords in localStorage
+            // This is for demonstration purposes only
+            
+            // Save login state
+            sessionStorage.setItem("loggedIn", "true");
+            sessionStorage.setItem("email", email);
+            
+            // Store login info (insecure - for demo only)
+            const loginInfo = {
+                email: email,
+                loginTime: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            let logins = JSON.parse(localStorage.getItem("loginHistory")) || [];
+            logins.push(loginInfo);
+            localStorage.setItem("loginHistory", JSON.stringify(logins));
+        }
+    </script>
+</body>
+</html>

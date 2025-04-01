@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | TechHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --secondary-dark: #d97706;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 28px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .cart-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .cart-title {
+            font-size: 32px;
+            color: var(--dark);
+        }
+        
+        .cart-empty {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .cart-empty i {
+            font-size: 60px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .cart-empty h3 {
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .cart-empty p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary-dark);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+        }
+        
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        
+        .cart-items {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-img {
+            width: 100px;
+            height: 100px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        
+        .cart-item-img i {
+            font-size: 40px;
+            color: var(--primary);
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        .cart-item-remove:hover {
+            color: #dc2626;
+        }
+        
+        .cart-summary {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .summary-row.total {
+            font-size: 20px;
+            font-weight: bold;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cart-item-img {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .cart-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .cart-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>TechHub</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#products">Products</a>
+                <button class="cart-btn" onclick="window.location.href='cart.html'">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="cart-container">
+        <div class="cart-header">
+            <h1 class="cart-title">Your Shopping Cart</h1>
+        </div>
+        
+        <div id="cart-empty" class="cart-empty">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Your cart is empty</h3>
+            <p>Browse our products and add items to your cart</p>
+            <a href="index.html" class="btn">Continue Shopping</a>
+        </div>
+        
+        <div id="cart-content" style="display: none;">
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be inserted here -->
+            </div>
+            
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">₹0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>FREE</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">₹0.00</span>
+                </div>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
+                <button class="btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Update cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem("loggedIn") !== "true") {
+                window.location.href = "login.html";
+            }
+            
+            displayCartItems();
+            updateCartCount();
+        });
+        
+        function displayCartItems() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartItems = document.getElementById("cart-items");
+            let cartEmpty = document.getElementById("cart-empty");
+            let cartContent = document.getElementById("cart-content");
+            
+            // Clear existing items
+            cartItems.innerHTML = "";
+            
+            if (cart.length === 0) {
+                cartEmpty.style.display = "block";
+                cartContent.style.display = "none";
+            } else {
+                cartEmpty.style.display = "none";
+                cartContent.style.display = "block";
+                
+                let subtotal = 0;
+                
+                cart.forEach((item, index) => {
+                    subtotal += item.price;
+                    
+                    let itemElement = document.createElement("div");
+                    itemElement.className = "cart-item";
+                    itemElement.innerHTML = `
+                        <div class="cart-item-img">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="cart-item-info">
+                            <h4 class="cart-item-name">${item.name}</h4>
+                            <p class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</p>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeItemFromCart(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    
+                    cartItems.appendChild(itemElement);
+                });
+                
+                document.getElementById("subtotal").textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+                document.getElementById("total").textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+            }
+        }
+        
+        function removeItemFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            displayCartItems();
+            updateCartCount();
+            showNotification("Item removed from cart");
+        }
+        
+        function clearCart() {
+            localStorage.removeItem("cart");
+            displayCartItems();
+            updateCartCount();
+            showNotification("Cart cleared");
+        }
+        
+        function checkout() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            if (cart.length === 0) {
+                showNotification("Your cart is empty", "error");
+                return;
+            }
+            
+            // In a real app, you would redirect to a checkout page
+            showNotification("Proceeding to checkout...");
+            setTimeout(() => {
+                alert("Thank you for your purchase!");
+                clearCart();
+            }, 1500);
+        }
+        
+        function logout() {
+            sessionStorage.removeItem("loggedIn");
+            window.location.href = "login.html";
+        }
+        
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.querySelector('.cart-count').textContent = cart.length;
+        }
+        
+        function showNotification(message, type = "success") {
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = type === "success" ? '#10b981' : '#ef4444';
+            notification.style.color = 'white';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '6px';
+            notification.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            notification.style.zIndex = '1000';
+            notification.style.transform = 'translateY(100px)';
+            notification.style.opacity = '0';
+            notification.style.transition = 'all 0.3s ease';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateY(0)';
+                notification.style.opacity = '1';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateY(100px)';
+                notification.style.opacity = '0';
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHub - Premium Electronics Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --secondary-dark: #d97706;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 28px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: var(--secondary-dark);
+        }
+        
+        /* Categories */
+        .categories {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: var(--dark);
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-img {
+            height: 120px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--primary);
+        }
+        
+        .category-info {
+            padding: 20px;
+        }
+        
+        .category-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        /* Products */
+        .products {
+            padding: 60px 0;
+            background: var(--light);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-img {
+            height: 200px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .product-img img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .product-meta {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>TechHub</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#laptops">Laptops</a>
+                <a href="#smartphones">Smartphones</a>
+                <a href="#tablets">Tablets</a>
+                <a href="#accessories">Accessories</a>
+                <a href="#audio">Audio</a>
+                <a href="#gaming">Gaming</a>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="cart-btn" onclick="goToCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Premium Tech at Unbeatable Prices</h1>
+            <p>Discover the latest gadgets and electronics with free shipping on all orders over ₹2000</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </section>
+    
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Laptops</h3>
+                        <p>25+ Products</p>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Smartphones</h3>
+                        <p>20+ Products</p>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Tablets</h3>
+                        <p>15+ Products</p>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Audio</h3>
+                        <p>30+ Products</p>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Gaming</h3>
+                        <p>35+ Products</p>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Accessories</h3>
+                        <p>50+ Products</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title" id="laptops">Laptops</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg" alt="MacBook Pro">
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>MacBook Pro 14" M2 Pro</h3>
+                        <p class="product-meta">Apple • 16GB RAM • 512GB SSD</p>
+                        <p class="product-price">₹1,65,917</p>
+                        <button class="add-to-cart" onclick="addToCart('MacBook Pro 14\" M2 Pro', 165917)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71vvXGmdKWL._AC_SL1500_.jpg" alt="Dell XPS 15">
+                    </div>
+                    <div class="product-info">
+                        <h3>Dell XPS 15</h3>
+                        <p class="product-meta">Dell • 32GB RAM • 1TB SSD</p>
+                        <p class="product-price">₹1,90,817</p>
+                        <button class="add-to-cart" onclick="addToCart('Dell XPS 15', 190817)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71S8U9VzLTL._AC_SL1500_.jpg" alt="HP Spectre x360">
+                        <span class="product-badge">Sale</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>HP Spectre x360</h3>
+                        <p class="product-meta">HP • 16GB RAM • 1TB SSD</p>
+                        <p class="product-price">₹1,32,717</p>
+                        <button class="add-to-cart" onclick="addToCart('HP Spectre x360', 132717)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61vD07yBhIL._AC_SL1500_.jpg" alt="Lenovo ThinkPad X1">
+                    </div>
+                    <div class="product-info">
+                        <h3>Lenovo ThinkPad X1 Carbon</h3>
+                        <p class="product-meta">Lenovo • 16GB RAM • 512GB SSD</p>
+                        <p class="product-price">₹1,49,317</p>
+                        <button class="add-to-cart" onclick="addToCart('Lenovo ThinkPad X1 Carbon', 149317)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61L5QgPvgxL._AC_SL1500_.jpg" alt="Asus ROG Zephyrus">
+                        <span class="product-badge">Gaming</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Asus ROG Zephyrus G14</h3>
+                        <p class="product-meta">Asus • 16GB RAM • 1TB SSD • RTX 3060</p>
+                        <p class="product-price">₹1,24,917</p>
+                        <button class="add-to-cart" onclick="addToCart('Asus ROG Zephyrus G14', 124917)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61Dw5Z8LzJL._AC_SL1000_.jpg" alt="Acer Swift 3">
+                    </div>
+                    <div class="product-info">
+                        <h3>Acer Swift 3</h3>
+                        <p class="product-meta">Acer • 8GB RAM • 512GB SSD</p>
+                        <p class="product-price">₹62,417</p>
+                        <button class="add-to-cart" onclick="addToCart('Acer Swift 3', 62417)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title" id="smartphones" style="margin-top: 60px;">Smartphones</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61cwywLZR-L._AC_SL1500_.jpg" alt="iPhone 15 Pro">
+                        <span class="product-badge">Best Seller</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>iPhone 15 Pro</h3>
+                        <p class="product-meta">Apple • 256GB • Titanium</p>
+                        <p class="product-price">₹82,917</p>
+                        <button class="add-to-cart" onclick="addToCart('iPhone 15 Pro', 82917)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/81I3w4J6yjL._AC_SL1500_.jpg" alt="Samsung Galaxy S23 Ultra">
+                    </div>
+                    <div class="product-info">
+                        <h3>Samsung Galaxy S23 Ultra</h3>
+                        <p class="product-meta">Samsung • 256GB • 12GB RAM</p>
+                        <p class="product-price">₹99,517</p>
+                        <button class="add-to-cart" onclick="addToCart('Samsung Galaxy S23 Ultra', 99517)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71V--WZVUIL._AC_SL1500_.jpg" alt="Google Pixel 8 Pro">
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Google Pixel 8 Pro</h3>
+                        <p class="product-meta">Google • 128GB • 12GB RAM</p>
+                        <p class="product-price">₹74,617</p>
+                        <button class="add-to-cart" onclick="addToCart('Google Pixel 8 Pro', 74617)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71geVdy6-OS._AC_SL1500_.jpg" alt="OnePlus 11">
+                    </div>
+                    <div class="product-info">
+                        <h3>OnePlus 11 5G</h3>
+                        <p class="product-meta">OnePlus • 256GB • 16GB RAM</p>
+                        <p class="product-price">₹66,317</p>
+                        <button class="add-to-cart" onclick="addToCart('OnePlus 11 5G', 66317)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71ArHz3MPIL._AC_SL1500_.jpg" alt="Xiaomi 13 Pro">
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Xiaomi 13 Pro</h3>
+                        <p class="product-meta">Xiaomi • 256GB • 12GB RAM</p>
+                        <p class="product-price">₹74,917</p>
+                        <button class="add-to-cart" onclick="addToCart('Xiaomi 13 Pro', 74917)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71pB3tGShIL._AC_SL1500_.jpg" alt="Vivo X90 Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3>Vivo X90 Pro</h3>
+                        <p class="product-meta">Vivo • 256GB • 12GB RAM</p>
+                        <p class="product-price">₹79,917</p>
+                        <button class="add-to-cart" onclick="addToCart('Vivo X90 Pro', 79917)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title" id="tablets" style="margin-top: 60px;">Tablets</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/81gD3iS4UyL._AC_SL1500_.jpg" alt="iPad Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3>iPad Pro 12.9" M2</h3>
+                        <p class="product-meta">Apple • 256GB • Wi-Fi</p>
+                        <p class="product-price">₹91,217</p>
+                        <button class="add-to-cart" onclick="addToCart('iPad Pro 12.9\" M2', 91217)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71qod7Gj0sL._AC_SL1500_.jpg" alt="Samsung Galaxy Tab S9">
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Samsung Galaxy Tab S9</h3>
+                        <p class="product-meta">Samsung • 256GB • 12GB RAM</p>
+                        <p class="product-price">₹82,917</p>
+                        <button class="add-to-cart" onclick="addToCart('Samsung Galaxy Tab S9', 82917)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71+FLm0vJVL._AC_SL1500_.jpg" alt="Microsoft Surface Pro 9">
+                    </div>
+                    <div class="product-info">
+                        <h3>Microsoft Surface Pro 9</h3>
+                        <p class="product-meta">Microsoft • 256GB • 16GB RAM</p>
+                        <p class="product-price">₹1,07,817</p>
+                        <button class="add-to-cart" onclick="addToCart('Microsoft Surface Pro 9', 107817)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71LXY9h00JL._AC_SL1500_.jpg" alt="Lenovo Tab P12 Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3>Lenovo Tab P12 Pro</h3>
+                        <p class="product-meta">Lenovo • 256GB • 8GB RAM</p>
+                        <p class="product-price">₹74,617</p>
+                        <button class="add-to-cart" onclick="addToCart('Lenovo Tab P12 Pro', 74617)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61XDeaOrr0L._AC_SL1500_.jpg" alt="Samsung Galaxy Tab A8">
+                    </div>
+                    <div class="product-info">
+                        <h3>Samsung Galaxy Tab A8</h3>
+                        <p class="product-meta">Samsung • 64GB • 4GB RAM</p>
+                        <p class="product-price">₹16,617</p>
+                        <button class="add-to-cart" onclick="addToCart('Samsung Galaxy Tab A8', 16617)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71QMc9Wk3QL._AC_SL1500_.jpg" alt="Realme Pad X">
+                        <span class="product-badge">Value</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Realme Pad X</h3>
+                        <p class="product-meta">Realme • 64GB • 4GB RAM</p>
+                        <p class="product-price">₹19,917</p>
+                        <button class="add-to-cart" onclick="addToCart('Realme Pad X', 19917)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title" id="audio" style="margin-top: 60px;">Audio</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg" alt="AirPods Pro">
+                        <span class="product-badge">Best Seller</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>AirPods Pro (2nd Gen)</h3>
+                        <p class="product-meta">Apple • Wireless • Noise Cancelling</p>
+                        <p class="product-price">₹20,667</p>
+                        <button class="add-to-cart" onclick="addToCart('AirPods Pro (2nd Gen)', 20667)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._AC_SL1500_.jpg" alt="Sony WH-1000XM5">
+                    </div>
+                    <div class="product-info">
+                        <h3>Sony WH-1000XM5</h3>
+                        <p class="product-meta">Sony • Wireless • Noise Cancelling</p>
+                        <p class="product-price">₹33,117</p>
+                        <button class="add-to-cart" onclick="addToCart('Sony WH-1000XM5', 33117)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SL1500_.jpg" alt="Bose QuietComfort 45">
+                    </div>
+                    <div class="product-info">
+                        <h3>Bose QuietComfort 45</h3>
+                        <p class="product-meta">Bose • Wireless • Noise Cancelling</p>
+                        <p class="product-price">₹27,307</p>
+                        <button class="add-to-cart" onclick="addToCart('Bose QuietComfort 45', 27307)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71KjJYgG4AL._AC_SL1500_.jpg" alt="JBL Flip 6">
+                        <span class="product-badge">Sale</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>JBL Flip 6 Portable Speaker</h3>
+                        <p class="product-meta">JBL • Bluetooth • Waterproof</p>
+                        <p class="product-price">₹10,707</p>
+                        <button class="add-to-cart" onclick="addToCart('JBL Flip 6 Portable Speaker', 10707)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61BvMkHopUL._AC_SL1500_.jpg" alt="Boat Airdopes 441">
+                    </div>
+                    <div class="product-info">
+                        <h3>Boat Airdopes 441</h3>
+                        <p class="product-meta">Boat • Wireless • 40hrs Playback</p>
+                        <p class="product-price">₹1,999</p>
+                        <button class="add-to-cart" onclick="addToCart('Boat Airdopes 441', 1999)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61Ej4vTDF4L._AC_SL1500_.jpg" alt="Sony SRS-XB43">
+                        <span class="product-badge">Party</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Sony SRS-XB43 Speaker</h3>
+                        <p class="product-meta">Sony • Bluetooth • 24hrs Battery</p>
+                        <p class="product-price">₹14,917</p>
+                        <button class="add-to-cart" onclick="addToCart('Sony SRS-XB43 Speaker', 14917)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title" id="gaming" style="margin-top: 60px;">Gaming</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61JGKhqxHxL._AC_SL1500_.jpg" alt="PlayStation 5">
+                        <span class="product-badge">Hot</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>PlayStation 5 Console</h3>
+                        <p class="product-meta">Sony • 825GB SSD • 4K Gaming</p>
+                        <p class="product-price">₹41,417</p>
+                        <button class="add-to-cart" onclick="addToCart('PlayStation 5 Console', 41417)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71H6JELjR0L._AC_SL1500_.jpg" alt="Xbox Series X">
+                    </div>
+                    <div class="product-info">
+                        <h3>Xbox Series X</h3>
+                        <p class="product-meta">Microsoft • 1TB SSD • 4K Gaming</p>
+                        <p class="product-price">₹41,417</p>
+                        <button class="add-to-cart" onclick="addToCart('Xbox Series X', 41417)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71H6JELjR0L._AC_SL1500_.jpg" alt="Nintendo Switch OLED">
+                    </div>
+                    <div class="product-info">
+                        <h3>Nintendo Switch OLED</h3>
+                        <p class="product-meta">Nintendo • 64GB • 7" OLED Screen</p>
+                        <p class="product-price">₹28,967</p>
+                        <button class="add-to-cart" onclick="addToCart('Nintendo Switch OLED', 28967)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71H6JELjR0L._AC_SL1500_.jpg" alt="Steam Deck">
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Steam Deck 512GB</h3>
+                        <p class="product-meta">Valve • Handheld PC Gaming</p>
+                        <p class="product-price">₹53,867</p>
+                        <button class="add-to-cart" onclick="addToCart('Steam Deck 512GB', 53867)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71qRO9UF1FL._AC_SL1500_.jpg" alt="Logitech G502">
+                    </div>
+                    <div class="product-info">
+                        <h3>Logitech G502 Gaming Mouse</h3>
+                        <p class="product-meta">Logitech • 25K DPI • 11 Buttons</p>
+                        <p class="product-price">₹4,917</p>
+                        <button class="add-to-cart" onclick="addToCart('Logitech G502 Gaming Mouse', 4917)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61UxfXTUyvL._AC_SL1500_.jpg" alt="Razer BlackWidow">
+                        <span class="product-badge">Mechanical</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Razer BlackWidow Keyboard</h3>
+                        <p class="product-meta">Razer • Mechanical • RGB</p>
+                        <p class="product-price">₹9,917</p>
+                        <button class="add-to-cart" onclick="addToCart('Razer BlackWidow Keyboard', 9917)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title" id="accessories" style="margin-top: 60px;">Accessories</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71zny7BTRlL._AC_SL1500_.jpg" alt="Apple Watch Ultra">
+                    </div>
+                    <div class="product-info">
+                        <h3>Apple Watch Ultra 2</h3>
+                        <p class="product-meta">Apple • GPS + Cellular • 49mm</p>
+                        <p class="product-price">₹66,317</p>
+                        <button class="add-to-cart" onclick="addToCart('Apple Watch Ultra 2', 66317)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61XDeaOrr0L._AC_SL1500_.jpg" alt="Samsung Galaxy Watch 6">
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Samsung Galaxy Watch 6 Classic</h3>
+                        <p class="product-meta">Samsung • 47mm • LTE</p>
+                        <p class="product-price">₹35,607</p>
+                        <button class="add-to-cart" onclick="addToCart('Samsung Galaxy Watch 6 Classic', 35607)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/71MHTD3uL4L._AC_SL1500_.jpg" alt="Logitech MX Master 3S">
+                    </div>
+                    <div class="product-info">
+                        <h3>Logitech MX Master 3S</h3>
+                        <p class="product-meta">Logitech • Wireless • Ergonomic</p>
+                        <p class="product-price">₹8,217</p>
+                        <button class="add-to-cart" onclick="addToCart('Logitech MX Master 3S', 8217)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_SL1500_.jpg" alt="Samsung T7 SSD">
+                    </div>
+                    <div class="product-info">
+                        <h3>Samsung T7 Shield 1TB SSD</h3>
+                        <p class="product-meta">Samsung • USB 3.2 • IP65 Rated</p>
+                        <p class="product-price">₹7,387</p>
+                        <button class="add-to-cart" onclick="addToCart('Samsung T7 Shield 1TB SSD', 7387)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61L5QgPvgxL._AC_SL1500_.jpg" alt="HP 24mh Monitor">
+                        <span class="product-badge">Monitor</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>HP 24mh FHD Monitor</h3>
+                        <p class="product-meta">HP • 24" • 75Hz • IPS</p>
+                        <p class="product-price">₹12,917</p>
+                        <button class="add-to-cart" onclick="addToCart('HP 24mh FHD Monitor', 12917)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://m.media-amazon.com/images/I/61UxfXTUyvL._AC_SL1500_.jpg" alt="Dell Wireless Keyboard">
+                    </div>
+                    <div class="product-info">
+                        <h3>Dell Wireless Keyboard Mouse Combo</h3>
+                        <p class="product-meta">Dell • 2.4GHz • Silent Click</p>
+                        <p class="product-price">₹2,417</p>
+                        <button class="add-to-cart" onclick="addToCart('Dell Wireless Keyboard Mouse Combo', 2417)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="#laptops">Laptops</a></li>
+                        <li><a href="#smartphones">Smartphones</a></li>
+                        <li><a href="#tablets">Tablets</a></li>
+                        <li><a href="#audio">Audio</a></li>
+                        <li><a href="#gaming">Gaming</a></li>
+                        <li><a href="#accessories">Accessories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Warranty</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <p style="margin-top: 20px; color: var(--gray);">Subscribe to our newsletter for exclusive offers</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 TechHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Update cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+        
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push({ name: name, price: price });
+            localStorage.setItem("cart", JSON.stringify(cart));
+            
+            // Show notification
+            showNotification(`${name} added to cart!`);
+            
+            // Update cart count
+            updateCartCount();
+        }
+        
+        function goToCart() {
+            window.location.href = "cart.html";
+        }
+        
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.querySelector('.cart-count').textContent = cart.length;
+        }
+        
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = '#10b981';
+            notification.style.color = 'white';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '6px';
+            notification.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            notification.style.zIndex = '1000';
+            notification.style.transform = 'translateY(100px)';
+            notification.style.opacity = '0';
+            notification.style.transition = 'all 0.3s ease';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.transform = 'translateY(0)';
+                notification.style.opacity = '1';
+            }, 100);
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateY(100px)';
+                notification.style.opacity = '0';
+                
+                // Remove after animation
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
